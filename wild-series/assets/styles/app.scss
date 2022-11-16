@@ -1,0 +1,12 @@
+@import "~bootstrap/scss/bootstrap";
+
+$primary: rgb(35, 26, 61);
+$secondary: rgb(61, 26, 26);
+
+body {
+    background-color: $primary;
+}
+
+img {
+    width: 500px;
+}
