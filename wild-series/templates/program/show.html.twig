@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wild Series{% endblock %}
+{% block title %}Série #{{ program.id }}{% endblock %}
 
 {% block body %}
-<h1>{{ id }}</h1>
+    <div>
+        <img src="{{ program.poster }}" alt="{{ program.title }} poster">
+        <div>
+            <h1>{{ program.title}}</h1>
+            <h2>Catégorie : {{ program.category.name }}</h2>
+            <p>{{ program.synopsis }}</p>
+        </div>
+    </div>
 {% endblock %}

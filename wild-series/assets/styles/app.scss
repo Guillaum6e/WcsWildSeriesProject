@@ -2,9 +2,11 @@
 
 $primary: rgb(35, 26, 61);
 $secondary: rgb(61, 26, 26);
+$textColor: white;
 
 body {
     background-color: $primary;
+    color: $textColor;
 }
 
 img {
