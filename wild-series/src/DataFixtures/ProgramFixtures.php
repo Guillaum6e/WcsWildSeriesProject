@@ -12,6 +12,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     const PROGRAMS = [
         [
             'title' => 'La Rivière perdue',
+            'slug' => 'la-rivière-perdue',
             'synopsis' => 'Une ancienne documentariste, Erica Shaw, est engagée pour réaliser un documentaire sur un multimillionnaire mourant,
                  Campbell Bradford. Cependant, le passé de Campbell est entouré de mystère, ce qui amène Shaw à 
                  faire des découvertes choquantes dans sa quête de la vérité qui la conduit, par ailleurs, dans sa ville natale.',
@@ -20,6 +21,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ],
         [
             'title' => 'Barbie : L’aventure de princesse',
+            'slug' => 'barbie',
             'synopsis' => "L'aventure commence lorsque Barbie et ses amis se rendent dans le pays de Floravie pour rencontrer la princesse Amelia, qui ressemble beaucoup à Barbie.
              La princesse Amelia est nerveuse à l'idée de devenir reine, alors elle élabore un plan pour échanger sa place avec Barbie. Leur secret est bien gardé jusqu'à ce qu'un prince rival découvre la vérité.",
             'poster' => 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/AwkmMTKJBAatbeAVhTwhcU3Pyp4.jpg',
@@ -27,6 +29,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ],
         [
             'title' => 'Pokémon 2 : Le pouvoir est en toi',
+            'slug' => 'pokemon',
             'synopsis' => "Sacha, Ondine et Jacky arrivent sur l'île de Shamouti. Les habitants leur parlent d'une légende où trois oiseaux mythiques, Artikodin, Électhor et Sulfura,
              règnent sur leur île respective. Au même moment Gelardan, un collectionneur Pokémon, capture les oiseaux pour sa collection personnelle et modifie donc le climat naturel de la Terre pour faire apparaître le Gardien des Abysses, Lugia.",
             'poster' => 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/r9uVYK7MNBTkREv0caUMRKB2IkY.jpg',
@@ -34,12 +37,14 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ],
         [
             'title' => 'After Porn Ends 3',
+            'slug' => 'after-porn-ends-trois',
             'synopsis' => "Le troisième volet de cette série documentaire se penche sur la vie des plus grandes stars du cinéma pour adultes une fois leur carrière terminée.",
             'poster' => 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9goN8D3NkigiUfNtyW2rh1uordZ.jpg',
             'category' => 'category_Documentaire',
         ],
         [
             'title' => '100% loup',
+            'slug' => 'cent-pourcents-loup',
             'synopsis' => "Freddy Lupin et sa famille cachent depuis des siècles un grand secret. Le jour, ils sont des humains ordinaires. Mais dès la tombée de la nuit, ils deviennent des loups‐garous !",
             'poster' => 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/pzaQuKvFsL82kRkpHZWNaVeZqhf.jpg',
             'category' => 'category_Animation',
@@ -55,6 +60,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setPoster($film['poster']);
             $program->setCategory($this->getReference($film['category']));
             $manager->persist($program);
+            $this->addReference('program_' . $film['slug'], $program);
         };
         $manager->flush();
     }
