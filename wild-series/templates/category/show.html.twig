@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{category.name}} list{% endblock %}
+{% block title %}{{category.name}} category{% endblock %}
 
 {% block body %}
     <h1>Tous les programmes de {{category.name}} :</h1>
@@ -9,7 +9,7 @@
         <div>
             <img src="{{ program.poster }}" alt="{{ program.title }} poster">
             <h2>{{ loop.index }} / {{ program.title}}</h2>
-            <h3>Catégorie : {{ program.category.name }}</h3>
+            <h3>Synopsis :</h3>
             <p>{{ program.synopsis }}</p>
             <a href="{{ path("program_show", {id: program.id}) }}">Voir</a>
         </div>
