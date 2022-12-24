@@ -1,5 +1,5 @@
 <?php
-// src/Controller/ProgramController.php
+
 namespace App\Controller;
 
 use App\Entity\Episode;
@@ -10,7 +10,9 @@ use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Form\ProgramType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
@@ -42,7 +44,7 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/program/{program_id<\d+>}/seasons/{season_id<\d+>}', methods: ['GET'], name: 'season_show')]
+    #[Route('/{program_id<\d+>}/seasons/{season_id<\d+>}', methods: ['GET'], name: 'season_show')]
     #[Entity('program', options: ['mapping' => ['program_id' => 'id']])]
     #[Entity('season', options: ['mapping' => ['season_id' => 'id']])]
     public function showSeason(Program $program, Season $season): Response
@@ -68,7 +70,7 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/program/{program_id<\d+>}/season/{season_id<\d+>}/episode/{episode_id<\d+>}', methods: ['GET'], name: 'episode_show')]
+    #[Route('/{program_id<\d+>}/season/{season_id<\d+>}/episode/{episode_id<\d+>}', methods: ['GET'], name: 'episode_show')]
     #[Entity('program', options: ['mapping' => ['program_id' => 'id']])]
     #[Entity('season', options: ['mapping' => ['season_id' => 'id']])]
     #[Entity('episode', options: ['mapping' => ['episode_id' => 'id']])]
@@ -96,6 +98,25 @@ class ProgramController extends AbstractController
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
+        ]);
+    }
+
+    #[Route('/new', name: 'new')]
+    public function new(Request $request, ProgramRepository $programRepository): Response
+    {
+        $program = new Program();
+
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $programRepository->save($program, true);
+            $id = $program->getId();
+
+            return $this->redirectToRoute('program_show', ['id' => $id], Response::HTTP_SEE_OTHER);
+        };
+        return $this->renderForm('program/new.html.twig', [
+            'form' => $form,
         ]);
     }
 }

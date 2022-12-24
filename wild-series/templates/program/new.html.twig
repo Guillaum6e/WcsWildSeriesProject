@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de programme{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.synopsis) }}
+        {{ form_row(form.poster) }}
+        {{ form_row(form.category) }}
+        <button class="btn">Insérer</button>
+    {{ form_end(form) }}
+    
+{% endblock %}
